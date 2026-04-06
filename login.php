@@ -1,0 +1,121 @@
+<?php
+session_start();
+	include 'conn.php';
+ ?>
+ <?php
+ 	if(isset($_POST['send'])){
+ 		$username= $_POST['username'];
+ 		$password= $_POST['password'];
+ 		$check="SELECT * FROM admin WHERE Username='$username' AND Password='$password'";
+	$query=mysql_query($check);
+	if(mysql_num_rows($query)==0){
+		echo"<div class='alert alert-danger'>USERNAME OR PASSWORD NOT CORRECT</div>";
+
+	}
+	else if(mysql_num_rows($query)==1){
+					$result= mysql_result($query, 0, 'Username');	
+					$_SESSION['Username']= $result;
+					header("location:user/admin/index.php");
+				}
+				else{
+					echo"<div class='alert alert-danger'>ERROR OCCURED</div>";
+				}
+	}
+
+	
+
+
+
+
+
+
+ ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>ONLINE VOTING SYSTEM</title>
+	<meta name="description" content="Slick &amp; clean CSS3 Forms Pack" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Forms stylesheet -->
+	<link rel="stylesheet" type="text/css" href="css/slick_lf.css" media="screen" />
+	<!-- / Forms stylesheet -->
+	<link rel="stylesheet" type="text/css" href="demo/demo.css" media="screen" />
+	<!--[if IE 9]>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/placeholder.js"></script>
+	<![endif]-->
+	<script type="text/javascript">''</script>
+</head>
+<body>
+<div id="page-2">
+
+	<!-- Start Demo page title -->
+	<div class="demo">
+	VOTING  SYSTEM
+	<h1>&#x25C2; THE IBARAPA POLYTECHNIC ERUWA &#x25B8;</h1>
+	</div>
+	<!-- End demo page title -->
+
+	<!-- *************************** -->
+	<!-- START COPYING FROM HERE     -->
+	<!-- *************************** -->
+
+	<section id="slick">
+		
+		<!-- Login form -->
+		<div class="login-form">
+			<!-- Title -->
+			<div class="title">Admin login</div> 
+			<!-- Intro text -->
+			<p class="intro"><b>Admin .</b> Login  to activate voters</p>
+			<!-- Form fields -->
+			<form action="" name="login" id="login" method="post">
+				<!-- Username input -->
+				<div class="field">
+					<input name="username" placeholder="Username" type="text" id="username" required />
+					<span class="entypo-user icon"></span>
+					<span class="slick-tip left">Enter your username</span>
+				</div>
+				<!-- Password input -->
+				<div class="field">
+					<input name="password" placeholder="Password" type="password" id="password" required />
+					<span class="entypo-lock icon"></span>
+					<span class="slick-tip left">Enter your password</span>
+				</div>
+				<div class="clrfx mt-10"></div>
+	
+				<!-- Send button -->
+				<input type="submit" value="Login" class="send" form="login" name="send" />
+			</form>
+			<!-- / Form fields -->
+		</div>
+		<!-- / Login form -->
+	</section>
+
+	<!-- *************************** -->
+	<!-- END COPYING HERE            -->
+	<!-- *************************** -->
+
+</div>
+</body>
+</html>
